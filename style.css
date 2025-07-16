@@ -1,25 +1,23 @@
 /* --- ESTILO "ANTHROPIC" PARA RADIO MATÍAS BATISTA --- */
 
-/* Definimos nuestras fuentes y colores en variables para fácil acceso */
 :root {
-    --font-serif: 'Lora', serif; /* Para títulos, como en Anthropic */
-    --font-sans: 'Inter', sans-serif; /* Para el resto del texto */
-    --color-background: #F8F5F2; /* Un blanco hueso muy suave */
-    --color-text-primary: #1A1A1A; /* Negro, no tan puro */
-    --color-text-secondary: #6B6B6B; /* Gris para textos secundarios */
-    --color-card-background: #FFFFFF; /* Blanco puro para la tarjeta del player */
+    --font-serif: 'Lora', serif;
+    --font-sans: 'Inter', sans-serif;
+    --color-background: #F8F5F2;
+    --color-text-primary: #1A1A1A;
+    --color-text-secondary: #6B6B6B;
+    --color-card-background: #FFFFFF;
 }
 
 body {
-    font-family: var(--font-sans); /* Fuente por defecto */
+    font-family: var(--font-sans);
     background-color: var(--color-background);
     color: var(--color-text-primary);
     margin: 0;
-    padding: 0;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1rem; /* Añadimos más aire */
 }
 
 header {
@@ -28,8 +26,8 @@ header {
 }
 
 header h1 {
-    font-family: var(--font-serif); /* Usamos la fuente Serif */
-    font-size: 3rem; /* Más grande e impactante */
+    font-family: var(--font-serif);
+    font-size: 3rem;
     font-weight: 700;
     margin: 0;
 }
@@ -40,17 +38,17 @@ header p {
 }
 
 main {
-    max-width: 550px; /* Un poco más estrecho para enfocar la atención */
+    max-width: 550px;
     width: 100%;
 }
 
 .player {
     background-color: var(--color-card-background);
-    border: 1px solid #E5E5E5; /* Borde sutil */
-    border-radius: 16px; /* Bordes más redondeados */
-    padding: 2.5rem; /* Más espacio interno */
+    border: 1px solid #E5E5E5;
+    border-radius: 16px;
+    padding: 2.5rem;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Sombra más suave */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
 .now-playing p {
@@ -59,7 +57,7 @@ main {
 }
 
 .now-playing h2 {
-    font-family: var(--font-serif); /* Título de la canción también con Serif */
+    font-family: var(--font-serif);
     font-size: 2rem;
     margin: 0.5rem 0;
 }
@@ -68,7 +66,7 @@ main {
     font-size: 1rem;
     color: var(--color-text-secondary);
     font-weight: 500;
-    margin: 0 0 2rem 0; /* Más espacio antes del reproductor */
+    margin: 0 0 2rem 0;
 }
 
 #audio-player {
@@ -87,7 +85,7 @@ main {
 footer {
     margin-top: 3rem;
     padding: 1rem;
-    color: #A0A0A0; /* Gris aún más claro para el footer */
+    color: #A0A0A0;
     font-size: 0.9rem;
     text-align: center;
 }
