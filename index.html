@@ -2,35 +2,25 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Radio Matías Batista - Al Aire</title>
+  <title>Radio Nico</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#F8F5F2">
-
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Radio Matías Batista</h1>
-    <p>La música que te mueve.</p>
+    <h1>Radio Nico</h1>
+    <p>Streaming en vivo.</p>
   </header>
 
   <main>
-    <div class="player">
-      <div class="station-select-wrap">
-        <label for="station-select">Emisora:</label>
-        <select id="station-select" aria-label="Seleccionar emisora">
-          <!-- Opciones se inyectan por JS -->
-        </select>
-      </div>
-
+    <div class="player single">
       <div class="now-playing">
         <p>Ahora suena</p>
-        <h2 id="song-title">Cargando...</h2>
+        <h2 id="song-title">Cargando</h2>
         <h3 id="artist-name"></h3>
         <p id="last-updated" class="meta-small"></p>
       </div>
@@ -41,19 +31,17 @@
         <span id="status-badge" class="status-badge status-idle">Listo</span>
       </div>
 
-      <audio id="audio-player" crossorigin="anonymous"></audio>
-      <!-- Nota: se omite atributo controls nativo y se controla por botones propios.
-           Si prefieres los controles nativos, agrega controls al audio y oculta play/pause custom. -->
-    </div>
-
-    <div class="info-section">
-      <h2>Nuestra programación</h2>
-      <p>Próximamente aquí.</p>
+      <!-- data attrs inyectan config sin editar JS en despliegues simples -->
+      <audio id="audio-player" crossorigin="anonymous"
+             data-station-name="Radio Nico"
+             data-stream-url="__REPLACE_STREAM_URL__"
+             data-metadata-url="__REPLACE_METADATA_URL__"
+             data-metadata-type="icecast"></audio>
     </div>
   </main>
 
   <footer>
-    <p>&copy; 2025 Radio Matías Batista. Proyecto con pasión.</p>
+    <p>&copy; 2025 Radio Nico. Proyecto en construcción.</p>
   </footer>
 
   <script src="script.js" defer></script>
