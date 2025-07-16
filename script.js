@@ -1,116 +1,56 @@
-/* Radio Matías Batista minimal
- * Single station, static deploy friendly (GitHub + Vercel).
- * Replace STREAM_URL with your live stream in HTTPS.
- * Metadata disabled until a working endpoint with CORS is available.
+/* Radio Matías Batista - estilo minimal con controles nativos
+ * Solo una emisora.
+ * Muestra título/artist si hay metadatos (Icecast o Shoutcast) opcionales.
+ * Heurística: "Artista - Canción" si viene en title.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* CONFIG */
-  // Demo stream that should play: FIP (Francia). Replace when you have your own.
+  /* CONFIGURA TU STREAM AQUÍ */
+  // Demo: FIP Francia. Cambia cuando tengas tu stream propio.
   const STREAM_URL = 'https://icecast.radiofrance.fr/fip-midfi.mp3';
 
-  // Metadata config (inactive). Set URL and type when ready.
-  const METADATA_URL = null; // example: 'https://example.com/status-json.xsl'
-  const METADATA_TYPE = null; // 'icecast' or 'shoutcast'
+  // Metadatos (opcional). Deja null si no tienes.
+  const METADATA_URL = null; // ejemplo: 'https://tu-servidor/status-json.xsl'
+  const METADATA_TYPE = null; // 'icecast' o 'shoutcast' o null (heurística)
 
-  /* DOM refs */
+  /* DOM */
   const audioEl = document.getElementById('audio-player');
-  const playBtn = document.getElementById('play-btn');
-  const pauseBtn = document.getElementById('pause-btn');
-  const statusBadge = document.getElementById('status-badge');
-  const errorMsg = document.getElementById('error-msg');
   const songTitleEl = document.getElementById('song-title');
   const artistNameEl = document.getElementById('artist-name');
   const lastUpdatedEl = document.getElementById('last-updated');
 
-  /* Init */
+  /* Inicializa fuente */
   audioEl.src = STREAM_URL;
+
+  /* Estado meta */
   updateNowPlaying('En vivo', 'Radio Matías Batista');
 
-  /* Play */
-  playBtn.addEventListener('click', () => {
-    clearError();
-    setStatus('loading', 'Cargando');
-    safePlay();
-  });
-
-  /* Pause */
-  pauseBtn.addEventListener('click', () => {
-    audioEl.pause();
-    setStatus('idle', 'Pausado');
-    playBtn.disabled = false;
-    pauseBtn.disabled = true;
-  });
-
-  /* Audio events */
+  /* Eventos de audio solo para refrescar hora */
   audioEl.addEventListener('playing', () => {
-    setStatus('playing', 'Reproduciendo');
-    playBtn.disabled = true;
-    pauseBtn.disabled = false;
+    lastUpdatedEl.textContent = 'Reproduciendo ' + timeNow();
   });
   audioEl.addEventListener('pause', () => {
-    if (!audioEl.ended) setStatus('idle', 'Pausado');
+    lastUpdatedEl.textContent = 'Pausado ' + timeNow();
   });
-  audioEl.addEventListener('waiting', () => setStatus('loading', 'Buffering'));
-  audioEl.addEventListener('stalled', () => setStatus('loading', 'Reconectando'));
   audioEl.addEventListener('error', () => {
-    setStatus('error', 'Error');
-    showError('No se pudo reproducir el stream. Revisa la URL o tu conexión.');
-    playBtn.disabled = false;
-    pauseBtn.disabled = true;
-  });
-  audioEl.addEventListener('ended', () => {
-    // Live streams pueden cortarse. Reintenta.
-    retryStream();
+    lastUpdatedEl.textContent = 'Error ' + timeNow();
   });
 
-  /* Metadata polling (off by default) */
+  /* Poll de metadatos si está configurado */
   if (METADATA_URL) startMetaPoll();
 
-  /* Functions */
-  function safePlay() {
-    audioEl.load();
-    audioEl.play().catch(err => {
-      setStatus('idle', 'Presiona Play');
-      showError('El navegador bloqueó la reproducción automática. Toca Play de nuevo si no comienza.');
-      console.warn('Play error', err);
-    });
-  }
-
-  function retryStream() {
-    setStatus('loading', 'Reconectando');
-    audioEl.load();
-    audioEl.play().catch(() => {
-      setStatus('error', 'Error');
-      playBtn.disabled = false;
-      pauseBtn.disabled = true;
-    });
-  }
-
-  function setStatus(state, msg) {
-    statusBadge.className = 'status-badge';
-    if (state === 'loading') statusBadge.classList.add('status-loading');
-    else if (state === 'playing') statusBadge.classList.add('status-playing');
-    else if (state === 'error') statusBadge.classList.add('status-error');
-    statusBadge.textContent = msg;
-  }
-
-  function showError(txt) {
-    errorMsg.textContent = txt;
-    errorMsg.hidden = false;
-  }
-  function clearError() {
-    errorMsg.textContent = '';
-    errorMsg.hidden = true;
-  }
-
+  /* Funciones */
   function updateNowPlaying(song, artist) {
     songTitleEl.textContent = song || 'En vivo';
     artistNameEl.textContent = artist || 'Radio Matías Batista';
-    lastUpdatedEl.textContent = 'Actualizado ' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    lastUpdatedEl.textContent = 'Actualizado ' + timeNow();
   }
 
-  /* Metadata poll scaffolding */
+  function timeNow() {
+    return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  }
+
+  /* --- Metadatos --- */
   let metaTimer = null;
   function startMetaPoll() {
     stopMetaPoll();
@@ -121,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (metaTimer) clearInterval(metaTimer);
     metaTimer = null;
   }
+
   async function fetchMeta() {
     try {
       const res = await fetch(METADATA_URL, { cache: 'no-store' });
@@ -132,7 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (METADATA_TYPE === 'icecast') {
         const data = JSON.parse(text);
-        const src = Array.isArray(data.icestats.source) ? data.icestats.source[0] : data.icestats.source;
+        const src = Array.isArray(data.icestats.source)
+          ? data.icestats.source[0]
+          : data.icestats.source;
         if (src && src.title) {
           [artist, song] = splitArtistTitle(src.title, artist, song);
         }
@@ -147,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       updateNowPlaying(song, artist);
     } catch (err) {
+      // Silencio; mantenemos última data
       console.warn('Meta error', err);
     }
   }
@@ -154,7 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function splitArtistTitle(raw, fallbackArtist, fallbackSong) {
     if (!raw) return [fallbackArtist, fallbackSong];
     const parts = raw.split(' - ');
-    if (parts.length >= 2) return [parts[0].trim(), parts.slice(1).join(' - ').trim()];
+    if (parts.length >= 2) {
+      return [parts[0].trim(), parts.slice(1).join(' - ').trim()];
+    }
     return [fallbackArtist, raw.trim()];
   }
 });
