@@ -4,24 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const songTitleEl = document.getElementById('song-title');
     const artistNameEl = document.getElementById('artist-name');
 
-    // --- ¡CAMBIO IMPORTANTE! ---
-    // Agregamos una URL de un stream público para que la radio suene de verdad.
-    // Esta es una estación de Lofi, ideal para probar.
-    const streamUrl = 'http://stream.lofi-radio.com:8000/lofi_128'; 
+    // URL de stream HTTPS segura y estable para la prueba.
+    const streamUrl = 'https://stream.live.vc.bbcmedia.co.uk/bbc_radio_one';
     
-    // Asignamos el stream al reproductor para que funcione al darle play.
+    // Asignamos el stream al reproductor.
     audioPlayer.src = streamUrl;
 
-    // --- MANTENEMOS LA SIMULACIÓN DE DATOS "AHORA SUENA" ---
-    // ¿Por qué? Porque este stream público no nos dice fácilmente qué canción suena.
-    // Nuestro sistema de simulación sigue siendo perfecto para diseñar la parte visual.
-    // Cuando contrates tu servicio de radio profesional, ellos sí te darán la API
-    // para mostrar la canción real.
-    
+    // Simulación de datos "Ahora Suena" para el diseño visual.
     function fetchMockNowPlayingData() {
         const mockData = {
-            artist: "Jorge González",
-            song_title: "Fe",
+            artist: "BBC Radio 1",
+            song_title: "Live from London",
         };
         updateUI(mockData);
     }
@@ -31,8 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         artistNameEl.textContent = data.artist;
     }
 
-    // Actualizamos la info visual al cargar la página
+    // Ejecutamos las funciones.
     fetchMockNowPlayingData();
-    // Y la actualizamos periódicamente para que parezca viva
     setInterval(fetchMockNowPlayingData, 15000);
 });
