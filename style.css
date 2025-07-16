@@ -28,7 +28,6 @@ body {
   line-height: 1.45;
 }
 
-/* Header */
 .site-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -38,15 +37,12 @@ body {
   font-size: clamp(2.25rem, 5vw, 3rem);
   font-weight: 700;
   margin: 0;
+  line-height: 1.1;
 }
 .site-header p {
   font-size: 1.1rem;
   color: var(--color-text-secondary);
   margin: 0.25rem 0 0;
-}
-.site-logo {
-  display: block;
-  margin: 0 auto 0.75rem;
 }
 
 main {
@@ -54,7 +50,6 @@ main {
   width: 100%;
 }
 
-/* Player card */
 .player {
   background-color: var(--color-card-background);
   border: 1px solid var(--color-border);
@@ -107,11 +102,9 @@ main {
   cursor: pointer;
   transition: transform 0.05s;
 }
-
 .player-controls button:active {
   transform: scale(0.95);
 }
-
 .player-controls button[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
@@ -125,17 +118,14 @@ main {
   background: #fafafa;
   color: var(--color-text-secondary);
 }
-
 .status-loading {
   background: var(--color-warn);
   color: #fff;
 }
-
 .status-playing {
   background: var(--color-success);
   color: #fff;
 }
-
 .status-error {
   background: var(--color-error);
   color: #fff;
@@ -151,7 +141,6 @@ main {
   text-align: center;
   margin-top: 3rem;
 }
-
 .info-section h2 {
   font-family: var(--font-serif);
   margin: 0 0 0.5rem 0;
