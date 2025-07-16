@@ -83,14 +83,15 @@ main {
 .meta-small {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
-  margin: 0 0 2rem 0;
+  margin: 0 0 3rem 0; /* más espacio sobre los controles */
 }
 
 #audio-player {
   width: 100%;
   max-width: 100%;
+  margin-top: 0.25rem; /* microajuste vertical */
+  margin-bottom: 0;    /* limpio */
 }
-
 .info-section {
   text-align: center;
   margin-top: 3rem;
