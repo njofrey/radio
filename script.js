@@ -1,21 +1,19 @@
 /* Radio Matías Batista minimal
- * Single station, static deploy friendly.
- * Replace STREAM_URL with your live stream.
- * Metadata disabled until we have endpoint with CORS.
+ * Single station, static deploy friendly (GitHub + Vercel).
+ * Replace STREAM_URL with your live stream in HTTPS.
+ * Metadata disabled until a working endpoint with CORS is available.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ----- CONFIG -----
-  // Demo: FIP (Francia). Cambia cuando tengas tu stream.
-  // Prueba: abre esta URL directo en el navegador. Si suena, sirve.
-  // Si no reproduce en tu país, dímelo y busco otra.
+  /* CONFIG */
+  // Demo stream that should play: FIP (Francia). Replace when you have your own.
   const STREAM_URL = 'https://icecast.radiofrance.fr/fip-midfi.mp3';
 
-  // Metadata apagada por defecto; activa cuando tengamos endpoint.
-  const METADATA_URL = null;
-  const METADATA_TYPE = null; // 'icecast' o 'shoutcast'
+  // Metadata config (inactive). Set URL and type when ready.
+  const METADATA_URL = null; // example: 'https://example.com/status-json.xsl'
+  const METADATA_TYPE = null; // 'icecast' or 'shoutcast'
 
-  // ----- DOM -----
+  /* DOM refs */
   const audioEl = document.getElementById('audio-player');
   const playBtn = document.getElementById('play-btn');
   const pauseBtn = document.getElementById('pause-btn');
@@ -25,20 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const artistNameEl = document.getElementById('artist-name');
   const lastUpdatedEl = document.getElementById('last-updated');
 
-  // Set stream
+  /* Init */
   audioEl.src = STREAM_URL;
-
-  // Initial NP
   updateNowPlaying('En vivo', 'Radio Matías Batista');
 
-  // PLAY
+  /* Play */
   playBtn.addEventListener('click', () => {
     clearError();
     setStatus('loading', 'Cargando');
     safePlay();
   });
 
-  // PAUSE
+  /* Pause */
   pauseBtn.addEventListener('click', () => {
     audioEl.pause();
     setStatus('idle', 'Pausado');
@@ -46,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pauseBtn.disabled = true;
   });
 
-  // Audio events
+  /* Audio events */
   audioEl.addEventListener('playing', () => {
     setStatus('playing', 'Reproduciendo');
     playBtn.disabled = true;
@@ -64,14 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
     pauseBtn.disabled = true;
   });
   audioEl.addEventListener('ended', () => {
-    // Streams live a veces se cierran; intenta resumir
+    // Live streams pueden cortarse. Reintenta.
     retryStream();
   });
 
-  // Metadata (apagada por ahora)
+  /* Metadata polling (off by default) */
   if (METADATA_URL) startMetaPoll();
 
-  // ----- funciones -----
+  /* Functions */
   function safePlay() {
     audioEl.load();
     audioEl.play().catch(err => {
@@ -93,17 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setStatus(state, msg) {
     statusBadge.className = 'status-badge';
-    switch (state) {
-      case 'loading':
-        statusBadge.classList.add('status-loading'); break;
-      case 'playing':
-        statusBadge.classList.add('status-playing'); break;
-      case 'error':
-        statusBadge.classList.add('status-error'); break;
-      default:
-        // idle
-        break;
-    }
+    if (state === 'loading') statusBadge.classList.add('status-loading');
+    else if (state === 'playing') statusBadge.classList.add('status-playing');
+    else if (state === 'error') statusBadge.classList.add('status-error');
     statusBadge.textContent = msg;
   }
 
@@ -122,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lastUpdatedEl.textContent = 'Actualizado ' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   }
 
-  // Meta poll (inactivo hasta que configures)
+  /* Metadata poll scaffolding */
   let metaTimer = null;
   function startMetaPoll() {
     stopMetaPoll();
@@ -162,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn('Meta error', err);
     }
   }
+
   function splitArtistTitle(raw, fallbackArtist, fallbackSong) {
     if (!raw) return [fallbackArtist, fallbackSong];
     const parts = raw.split(' - ');
