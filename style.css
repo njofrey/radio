@@ -1,91 +1,180 @@
-/* --- ESTILO "ANTHROPIC" PARA RADIO MATÍAS BATISTA --- */
-
+/* Estilo base */
 :root {
-    --font-serif: 'Lora', serif;
-    --font-sans: 'Inter', sans-serif;
-    --color-background: #F8F5F2;
-    --color-text-primary: #1A1A1A;
-    --color-text-secondary: #6B6B6B;
-    --color-card-background: #FFFFFF;
+  --font-serif: 'Lora', serif;
+  --font-sans: 'Inter', sans-serif;
+  --color-background: #F8F5F2;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+  --color-card-background: #FFFFFF;
+  --color-border: #E5E5E5;
+  --color-success: #2e7d32;
+  --color-error: #c62828;
+  --color-warn: #ed6c02;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-sans);
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    margin: 0;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.45;
 }
 
 header {
-    text-align: center;
-    margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 header h1 {
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 700;
+  margin: 0;
 }
 
 header p {
-    font-size: 1.1rem;
-    color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin: 0.25rem 0 0;
 }
 
 main {
-    max-width: 550px;
-    width: 100%;
+  max-width: 550px;
+  width: 100%;
 }
 
 .player {
-    background-color: var(--color-card-background);
-    border: 1px solid #E5E5E5;
-    border-radius: 16px;
-    padding: 2.5rem;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  background-color: var(--color-card-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.station-select-wrap {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.station-select-wrap label {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.station-select-wrap select {
+  padding: 0.35rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--color-text-primary);
 }
 
 .now-playing p {
-    color: var(--color-text-secondary);
-    margin: 0;
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 .now-playing h2 {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    margin: 0.5rem 0;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin: 0.5rem 0;
+  word-break: break-word;
 }
 
 .now-playing h3 {
-    font-size: 1rem;
-    color: var(--color-text-secondary);
-    font-weight: 500;
-    margin: 0 0 2rem 0;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+  word-break: break-word;
 }
 
-#audio-player {
-    width: 100%;
+.meta-small {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 2rem 0;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.player-controls button {
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.05s;
+}
+
+.player-controls button:active {
+  transform: scale(0.95);
+}
+
+.player-controls button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: #fafafa;
+  color: var(--color-text-secondary);
+}
+
+.status-loading {
+  background: var(--color-warn);
+  color: #fff;
+}
+
+.status-playing {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.status-error {
+  background: var(--color-error);
+  color: #fff;
 }
 
 .info-section {
-    text-align: center;
-    margin-top: 3rem;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .info-section h2 {
-    font-family: var(--font-serif);
+  font-family: var(--font-serif);
+  margin: 0 0 0.5rem 0;
 }
 
 footer {
-    margin-top: 3rem;
-    padding: 1rem;
-    color: #A0A0A0;
-    font-size: 0.9rem;
-    text-align: center;
+  margin-top: 3rem;
+  padding: 1rem;
+  color: #A0A0A0;
+  font-size: 0.9rem;
+  text-align: center;
 }
