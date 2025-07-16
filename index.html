@@ -5,23 +5,11 @@
   <title>Radio Matías Batista · Al Aire</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#F8F5F2">
-
-  <!-- Favicon e ícono -->
-  <link rel="icon" type="image/svg+xml" href="radio-icon.svg">
-  <link rel="alternate icon" type="image/png" href="radio-icon.png">
-  <link rel="apple-touch-icon" href="radio-icon-180.png">
-
-  <!-- Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <img src="radio-icon.svg" alt="" class="site-logo" width="64" height="64">
-    <h1>Radio Matías Batista</h1>
+    <h1>📻 Radio Matías Batista</h1>
     <p>La música que te mueve</p>
   </header>
 
@@ -40,9 +28,7 @@
         <span id="status-badge" class="status-badge status-idle">Listo</span>
       </div>
 
-      <!-- Importante: playsinline para iOS; preload none para evitar descargas auto -->
       <audio id="audio-player" preload="none" playsinline crossorigin="anonymous"></audio>
-
       <div id="error-msg" role="alert" class="error-msg" hidden></div>
     </section>
 
