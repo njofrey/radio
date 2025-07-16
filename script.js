@@ -1,19 +1,21 @@
-/* Radio Matías Batista
- * Single station player for static hosting (GitHub + Vercel).
- * Shows current song if metadata endpoint available.
- * Graceful fallback when metadata blocked by CORS.
- * Works in modern Chrome, Safari (desktop + iOS), Firefox, Edge.
+/* Radio Matías Batista minimal
+ * Single station, static deploy friendly.
+ * Replace STREAM_URL with your live stream.
+ * Metadata disabled until we have endpoint with CORS.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // ----- CONFIG -----
-  // TODO: reemplaza con tu stream real. Debe ser HTTPS para evitar bloqueo mixto.
-  const STREAM_URL = 'https://example.com/live.mp3'; // <--- cambia esto
-  // Opcional: endpoint para metadatos
-  const METADATA_URL = null; // p.ej. 'https://example.com/status-json.xsl'
-  const METADATA_TYPE = null; // 'icecast' | 'shoutcast' | null
+  // Demo: FIP (Francia). Cambia cuando tengas tu stream.
+  // Prueba: abre esta URL directo en el navegador. Si suena, sirve.
+  // Si no reproduce en tu país, dímelo y busco otra.
+  const STREAM_URL = 'https://icecast.radiofrance.fr/fip-midfi.mp3';
 
-  // ----- ELEMENTOS -----
+  // Metadata apagada por defecto; activa cuando tengamos endpoint.
+  const METADATA_URL = null;
+  const METADATA_TYPE = null; // 'icecast' o 'shoutcast'
+
+  // ----- DOM -----
   const audioEl = document.getElementById('audio-player');
   const playBtn = document.getElementById('play-btn');
   const pauseBtn = document.getElementById('pause-btn');
@@ -23,29 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const artistNameEl = document.getElementById('artist-name');
   const lastUpdatedEl = document.getElementById('last-updated');
 
-  // Configura fuente de audio
+  // Set stream
   audioEl.src = STREAM_URL;
 
-  // Estado meta
-  let metaTimer = null;
-  let lastMetaText = '';
+  // Initial NP
+  updateNowPlaying('En vivo', 'Radio Matías Batista');
 
-  // ----- PLAY -----
+  // PLAY
   playBtn.addEventListener('click', () => {
     clearError();
     setStatus('loading', 'Cargando');
     safePlay();
   });
 
-  // ----- PAUSE -----
+  // PAUSE
   pauseBtn.addEventListener('click', () => {
     audioEl.pause();
-    setStatus('idle', 'Listo');
+    setStatus('idle', 'Pausado');
     playBtn.disabled = false;
     pauseBtn.disabled = true;
   });
 
-  // Audio listeners
+  // Audio events
   audioEl.addEventListener('playing', () => {
     setStatus('playing', 'Reproduciendo');
     playBtn.disabled = true;
@@ -57,36 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
   audioEl.addEventListener('waiting', () => setStatus('loading', 'Buffering'));
   audioEl.addEventListener('stalled', () => setStatus('loading', 'Reconectando'));
   audioEl.addEventListener('error', () => {
-    setStatus('error', 'Error de reproducción');
+    setStatus('error', 'Error');
     showError('No se pudo reproducir el stream. Revisa la URL o tu conexión.');
     playBtn.disabled = false;
     pauseBtn.disabled = true;
   });
   audioEl.addEventListener('ended', () => {
-    // En streams live a veces Safari detiene; intenta reanudar
+    // Streams live a veces se cierran; intenta resumir
     retryStream();
   });
 
-  // ----- METADATA POLL -----
+  // Metadata (apagada por ahora)
   if (METADATA_URL) startMetaPoll();
-  else {
-    // Sin meta, muestra nombre fijo
-    updateNowPlaying('En vivo', 'Radio Matías Batista');
-  }
 
-  // Pausar poll cuando pestaña oculta
-  document.addEventListener('visibilitychange', () => {
-    if (!METADATA_URL) return;
-    if (document.hidden) stopMetaPoll();
-    else startMetaPoll();
-  });
-
-  // ----- FUNCIONES -----
+  // ----- funciones -----
   function safePlay() {
-    // Algunos navegadores requieren cargar primero
     audioEl.load();
     audioEl.play().catch(err => {
-      // Autoplay bloqueado o error
       setStatus('idle', 'Presiona Play');
       showError('El navegador bloqueó la reproducción automática. Toca Play de nuevo si no comienza.');
       console.warn('Play error', err);
@@ -107,14 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
     statusBadge.className = 'status-badge';
     switch (state) {
       case 'loading':
-        statusBadge.classList.add('status-loading');
-        break;
+        statusBadge.classList.add('status-loading'); break;
       case 'playing':
-        statusBadge.classList.add('status-playing');
-        break;
+        statusBadge.classList.add('status-playing'); break;
       case 'error':
-        statusBadge.classList.add('status-error');
-        break;
+        statusBadge.classList.add('status-error'); break;
       default:
         // idle
         break;
@@ -137,18 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
     lastUpdatedEl.textContent = 'Actualizado ' + new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
   }
 
+  // Meta poll (inactivo hasta que configures)
+  let metaTimer = null;
   function startMetaPoll() {
     stopMetaPoll();
     fetchMeta();
-    metaTimer = setInterval(fetchMeta, 15000); // cada 15 s
+    metaTimer = setInterval(fetchMeta, 15000);
   }
   function stopMetaPoll() {
-    if (metaTimer) {
-      clearInterval(metaTimer);
-      metaTimer = null;
-    }
+    if (metaTimer) clearInterval(metaTimer);
+    metaTimer = null;
   }
-
   async function fetchMeta() {
     try {
       const res = await fetch(METADATA_URL, { cache: 'no-store' });
@@ -173,17 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
         [artist, song] = splitArtistTitle(text, artist, song);
       }
 
-      const combined = artist + ' - ' + song;
-      if (combined !== lastMetaText) {
-        lastMetaText = combined;
-        updateNowPlaying(song, artist);
-      }
+      updateNowPlaying(song, artist);
     } catch (err) {
       console.warn('Meta error', err);
-      // degrada silencioso
     }
   }
-
   function splitArtistTitle(raw, fallbackArtist, fallbackSong) {
     if (!raw) return [fallbackArtist, fallbackSong];
     const parts = raw.split(' - ');
