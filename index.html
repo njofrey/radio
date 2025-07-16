@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Radio Matías Batista - Al Aire</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>Radio Matías Batista - Al Aire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F5F2">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <h1>Radio Matías Batista</h1>
+    <p>La música que te mueve.</p>
+  </header>
 
-    <header>
-        <h1>Radio Matías Batista</h1>
-        <p>La música que te mueve.</p>
-    </header>
+  <main>
+    <div class="player">
+      <div class="station-select-wrap">
+        <label for="station-select">Emisora:</label>
+        <select id="station-select" aria-label="Seleccionar emisora">
+          <!-- Opciones se inyectan por JS -->
+        </select>
+      </div>
 
-    <main>
-        <div class="player">
-            <div class="now-playing">
-                <p>Ahora Suena:</p>
-                <h2 id="song-title">Cargando...</h2>
-                <h3 id="artist-name"></h3>
-            </div>
-            
-            <audio id="audio-player" controls></audio>
-        </div>
+      <div class="now-playing">
+        <p>Ahora suena</p>
+        <h2 id="song-title">Cargando...</h2>
+        <h3 id="artist-name"></h3>
+        <p id="last-updated" class="meta-small"></p>
+      </div>
 
-        <div class="info-section">
-            <h2>Nuestra Programación</h2>
-            <p>Próximamente aquí...</p>
-        </div>
-    </main>
+      <div class="player-controls">
+        <button id="play-btn" type="button" aria-label="Reproducir">▶️</button>
+        <button id="pause-btn" type="button" aria-label="Pausar" disabled>⏸️</button>
+        <span id="status-badge" class="status-badge status-idle">Listo</span>
+      </div>
 
-    <footer>
-        <p>&copy; 2025 Radio Matías Batista. Un proyecto con pasión.</p>
-    </footer>
+      <audio id="audio-player" crossorigin="anonymous"></audio>
+      <!-- Nota: se omite atributo controls nativo y se controla por botones propios.
+           Si prefieres los controles nativos, agrega controls al audio y oculta play/pause custom. -->
+    </div>
 
-    <script src="script.js"></script>
+    <div class="info-section">
+      <h2>Nuestra programación</h2>
+      <p>Próximamente aquí.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Radio Matías Batista. Proyecto con pasión.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
