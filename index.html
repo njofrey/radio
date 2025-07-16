@@ -2,26 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Radio Nico</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radio Matías Batista · Al Aire</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#F8F5F2">
+
+  <!-- Favicon e ícono -->
+  <link rel="icon" type="image/svg+xml" href="radio-icon.svg">
+  <link rel="alternate icon" type="image/png" href="radio-icon.png">
+  <link rel="apple-touch-icon" href="radio-icon-180.png">
+
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Radio Nico</h1>
-    <p>Streaming en vivo.</p>
+  <header class="site-header">
+    <img src="radio-icon.svg" alt="" class="site-logo" width="64" height="64">
+    <h1>Radio Matías Batista</h1>
+    <p>La música que te mueve</p>
   </header>
 
   <main>
-    <div class="player single">
+    <section class="player" aria-label="Reproductor de radio">
       <div class="now-playing">
-        <p>Ahora suena</p>
-        <h2 id="song-title">Cargando</h2>
-        <h3 id="artist-name"></h3>
+        <p class="np-label">Ahora suena</p>
+        <h2 id="song-title">En vivo</h2>
+        <h3 id="artist-name">Radio Matías Batista</h3>
         <p id="last-updated" class="meta-small"></p>
       </div>
 
@@ -31,17 +40,20 @@
         <span id="status-badge" class="status-badge status-idle">Listo</span>
       </div>
 
-      <!-- data attrs inyectan config sin editar JS en despliegues simples -->
-      <audio id="audio-player" crossorigin="anonymous"
-             data-station-name="Radio Nico"
-             data-stream-url="__REPLACE_STREAM_URL__"
-             data-metadata-url="__REPLACE_METADATA_URL__"
-             data-metadata-type="icecast"></audio>
-    </div>
+      <!-- Importante: playsinline para iOS; preload none para evitar descargas auto -->
+      <audio id="audio-player" preload="none" playsinline crossorigin="anonymous"></audio>
+
+      <div id="error-msg" role="alert" class="error-msg" hidden></div>
+    </section>
+
+    <section class="info-section">
+      <h2>Programación</h2>
+      <p>Pronto.</p>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Radio Nico. Proyecto en construcción.</p>
+    <p>&copy; 2025 Radio Matías Batista. Proyecto independiente.</p>
   </footer>
 
   <script src="script.js" defer></script>
