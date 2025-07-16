@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF--8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Radio Online - ¡Al Aire!</title>
+    
+    <title>Radio Matías Batista - Al Aire</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>📻 Mi Radio Online</h1>
+        <h1>Radio Matías Batista</h1>
         <p>La música que te mueve.</p>
     </header>
 
@@ -17,14 +23,11 @@
         <div class="player">
             <div class="now-playing">
                 <p>Ahora Suena:</p>
-                <div id="cover-art">
-                    <img src="https://via.placeholder.com/150" alt="Carátula del Álbum">
-                </div>
                 <h2 id="song-title">Cargando...</h2>
                 <h3 id="artist-name"></h3>
             </div>
             
-            <audio id="audio-player" controls src="URL_DE_TU_STREAM_AQUI"></audio>
+            <audio id="audio-player" controls></audio>
             </div>
 
         <div class="info-section">
@@ -34,7 +37,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Mi Radio Online. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Radio Matías Batista. Un proyecto con pasión.</p>
     </footer>
 
     <script src="script.js"></script>
