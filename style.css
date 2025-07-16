@@ -1,6 +1,6 @@
 :root {
-  --font-serif: 'Lora', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', 'Lora', serif;
+  --font-sans: 'DM Sans', 'Inter', sans-serif;
   --color-background: #F8F5F2;
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #6B6B6B;
@@ -28,13 +28,14 @@ body {
   line-height: 1.45;
 }
 
+/* Header */
 .site-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 .site-header h1 {
   font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 700;
   margin: 0;
   line-height: 1.1;
@@ -50,6 +51,7 @@ main {
   width: 100%;
 }
 
+/* Player card */
 .player {
   background-color: var(--color-card-background);
   border: 1px solid var(--color-border);
@@ -62,11 +64,14 @@ main {
 .now-playing .np-label {
   color: var(--color-text-secondary);
   margin: 0;
+  font-style: italic;
+  font-family: var(--font-serif);
 }
 
 .now-playing h2 {
   font-family: var(--font-serif);
   font-size: 2rem;
+  font-weight: 700;
   margin: 0.5rem 0;
   word-break: break-word;
 }
@@ -74,7 +79,7 @@ main {
 .now-playing h3 {
   font-size: 1rem;
   color: var(--color-text-secondary);
-  font-weight: 500;
+  font-weight: 400;
   margin: 0 0 0.5rem 0;
   word-break: break-word;
 }
