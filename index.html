@@ -9,13 +9,13 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <h1>📻 Radio Matías Batista</h1>
+  <header>
+    <h1>Radio Matías Batista</h1>
     <p>La música que te mueve</p>
   </header>
 
@@ -28,14 +28,16 @@
         <p id="last-updated" class="meta-small"></p>
       </div>
 
-      <div class="player-controls">
-        <button id="play-btn" type="button" aria-label="Reproducir">▶️</button>
-        <button id="pause-btn" type="button" aria-label="Pausar" disabled>⏸️</button>
-        <span id="status-badge" class="status-badge status-idle">Listo</span>
-      </div>
-
-      <audio id="audio-player" preload="none" playsinline crossorigin="anonymous"></audio>
-      <div id="error-msg" role="alert" class="error-msg" hidden></div>
+      <!-- Controles nativos para máxima compatibilidad -->
+      <audio
+        id="audio-player"
+        preload="none"
+        controls
+        controlslist="nodownload noplaybackrate"
+        playsinline
+        crossorigin="anonymous">
+        Tu navegador no soporta audio HTML5.
+      </audio>
     </section>
 
     <section class="info-section">
