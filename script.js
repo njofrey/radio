@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // CANCIONES RESTAURADAS - Catálogo completo con sanitización
     const brutalSongs = [
-        { artist: "MATIAS_BATISTA", song_title: "SINCE_1985" },
+        { artist: "SINCE_1985", song_title: "CURATED_MUSIC" },
     ].map(song => ({
         artist: sanitizeText(song.artist),
         song_title: sanitizeText(song.song_title)
