@@ -377,7 +377,7 @@ footer {
         padding: 30px 15px;
         gap: 30px;
         justify-content: flex-start; /* Evita espacio grande al final */
-        flex-grow: 0; /* no empujar footer hacia abajo */
+        flex-grow: 1; /* permite ocupar espacio y empujar footer */
     }
     
     /* --- ALINEACIÓN PERFECTA DEL TÍTULO EN MÓVIL --- */
