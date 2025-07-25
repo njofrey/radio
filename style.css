@@ -44,6 +44,17 @@ body {
     letter-spacing: 0.5px;
 }
 
+html {
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--white) !important;
+        color: var(--black) !important;
+    }
+}
+
 /* --- ESTRUCTURA PRINCIPAL --- */
 .main-content {
     flex-grow: 1;
