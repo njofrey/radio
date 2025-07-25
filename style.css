@@ -368,11 +368,15 @@ footer {
 
 /* --- RESPONSIVE MEJORADO CON UX MÓVIL OPTIMIZADA --- */
 @media (max-width: 768px) {
+    body {
+        padding-top: 20px; /* espacio desde el techo */
+    }
+
     .main-content {
         padding: 30px 15px;
         gap: 30px;
-        /* padding-bottom: 280px;  eliminado, se maneja en body */
         justify-content: flex-start; /* Evita espacio grande al final */
+        flex-grow: 0; /* no empujar footer hacia abajo */
     }
     
     /* --- ALINEACIÓN PERFECTA DEL TÍTULO EN MÓVIL --- */
