@@ -345,6 +345,7 @@ footer {
     color: var(--white);
     padding: 20px 40px;
     border-top: 4px solid var(--black);
+    margin-top: 80px; /* espacio consistente antes del footer */
 }
 
 .footer-content {
@@ -446,7 +447,7 @@ footer {
     .main-content {
         padding: 20px 10px;
         gap: 25px;
-        padding-bottom: 300px; /* Más espacio para consola en pantallas muy pequeñas */
+        /* padding-bottom eliminado para quitar espacio extra */
     }
     
     .main-play-button {
@@ -601,3 +602,9 @@ footer {
 }
 
 .subtitle-block { display:none; }
+
+@media (max-width: 768px) {
+    footer {
+        margin-top: 60px; /* ajuste en móvil */
+    }
+}
