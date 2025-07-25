@@ -144,11 +144,24 @@ html {
     outline: none; /* Removemos outline por defecto */
 }
 
-.main-play-button:hover {
-    background-color: var(--white);
-    color: var(--black);
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px var(--black);
+/* Hover sólo en dispositivos con cursor */
+@media (hover: hover) {
+    .main-play-button:hover {
+        background-color: var(--white);
+        color: var(--black);
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px var(--black);
+    }
+}
+
+/* quitar hover persistente en touch */
+@media (hover: none) {
+    .main-play-button:hover {
+        background-color: var(--yellow);
+        color: var(--black);
+        transform: none;
+        box-shadow: 4px 4px 0px var(--black);
+    }
 }
 
 .main-play-button:active {
