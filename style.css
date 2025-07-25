@@ -362,7 +362,8 @@ footer {
         font-size: clamp(2rem, 12vw, 2.8rem); /* Hacemos la fuente un poco más grande en móvil */
         border-left: none; /* Quitamos el borde lateral */
         padding-left: 0; /* Quitamos el padding lateral */
-        border-top: 6px solid var(--black); /* Lo reemplazamos por un borde superior */
+        /* Eliminamos borde superior para evitar la línea blanca en móvil */
+        border-top: none;
         padding-top: 10px; /* Añadimos espacio arriba */
         text-align: left; /* Aseguramos la alineación */
         width: 100%; /* Hacemos que ocupe todo el ancho del contenedor */
@@ -499,7 +500,7 @@ footer {
 }
 
 .main-title h1 {
-    border: none;
+    border: none !important;
     padding: 0;
     text-align: center;
 }
