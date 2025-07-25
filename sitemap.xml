@@ -8,7 +8,7 @@
 
     <!-- Página principal -->
     <url>
-        <loc>https://matiasbatista.cl/</loc>
+        <loc>https://matiasbatista.com/</loc>
         <lastmod>2025-01-02</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
@@ -17,7 +17,7 @@
 
     <!-- Archivo CSS -->
     <url>
-        <loc>https://matiasbatista.cl/style.css</loc>
+        <loc>https://matiasbatista.com/style.css</loc>
         <lastmod>2025-01-02</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.3</priority>
@@ -25,7 +25,7 @@
 
     <!-- Archivo JavaScript -->
     <url>
-        <loc>https://matiasbatista.cl/script.js</loc>
+        <loc>https://matiasbatista.com/script.js</loc>
         <lastmod>2025-01-02</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.3</priority>

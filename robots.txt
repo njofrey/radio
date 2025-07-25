@@ -25,9 +25,9 @@ Allow: /og-image.jpg
 Allow: /apple-touch-icon.png
 
 # Sitemap
-Sitemap: https://matiasbatista.cl/sitemap.xml
+Sitemap: https://matiasbatista.com/sitemap.xml
 
 # Información adicional
 # Radio Matías Batista - Radio Online
 # Transmisión en vivo curada 24/7
-# https://matiasbatista.cl 
+# https://matiasbatista.com 

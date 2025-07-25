@@ -81,8 +81,8 @@ Header unset Server
 
 # Canonical URL enforcement
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^matiasbatista\.cl$ [NC]
-RewriteRule ^(.*)$ https://matiasbatista.cl/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} !^matiasbatista\.com$ [NC]
+RewriteRule ^(.*)$ https://matiasbatista.com/$1 [R=301,L]
 
 # Remove trailing slash (except for directories)
 RewriteCond %{REQUEST_FILENAME} !-d

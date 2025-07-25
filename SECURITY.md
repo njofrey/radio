@@ -197,7 +197,7 @@ ExpiresByType text/html "access plus 1 day"
 Si encuentras una vulnerabilidad de seguridad, por favor:
 
 1. **NO la publiques públicamente**
-2. Envía un email a: security@matiasbatista.cl
+2. Envía un email a: security@matiasbatista.com
 3. Incluye pasos para reproducir
 4. Espera confirmación antes de disclosure público
 
