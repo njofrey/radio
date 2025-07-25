@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# SEO Optimizado para Dame Más FM
+# SEO Optimizado para Radio Matías Batista
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
@@ -25,9 +25,9 @@ Allow: /og-image.jpg
 Allow: /apple-touch-icon.png
 
 # Sitemap
-Sitemap: https://damemasfm.com/sitemap.xml
+Sitemap: https://matiasbatista.cl/sitemap.xml
 
 # Información adicional
-# Dame Más FM - Radio Online
-# Sonidos curados para mentes enfocadas
-# https://damemasfm.com 
+# Radio Matías Batista - Radio Online
+# Transmisión en vivo curada 24/7
+# https://matiasbatista.cl 

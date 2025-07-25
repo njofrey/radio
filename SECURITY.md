@@ -1,4 +1,4 @@
-# 🔒 SECURITY DOCUMENTATION - Dame Más FM v4.1
+# 🔒 SECURITY DOCUMENTATION - Radio Matías Batista v1.0
 
 ## Overview
 Este documento detalla todas las medidas de seguridad implementadas en Dame Más FM para proteger tanto la aplicación como los usuarios.
@@ -197,7 +197,7 @@ ExpiresByType text/html "access plus 1 day"
 Si encuentras una vulnerabilidad de seguridad, por favor:
 
 1. **NO la publiques públicamente**
-2. Envía un email a: security@damemasfm.com
+2. Envía un email a: security@matiasbatista.cl
 3. Incluye pasos para reproducir
 4. Espera confirmación antes de disclosure público
 

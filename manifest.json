@@ -1,7 +1,7 @@
 {
-    "name": "Dame Más FM - Radio Online",
-    "short_name": "Dame Más FM",
-    "description": "Radio online con música curada las 24 horas. Sonidos curados para mentes enfocadas.",
+    "name": "Radio Matías Batista - Online",
+    "short_name": "Matías Batista",
+    "description": "Radio online de Matías Batista transmitiendo música curada 24/7.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#FFFFFF",
@@ -28,7 +28,7 @@
         {
             "name": "Escuchar en Vivo",
             "short_name": "Play",
-            "description": "Reproduce Dame Más FM directamente",
+            "description": "Reproduce Radio Matías Batista directamente",
             "url": "/?play=true",
             "icons": [
                 {
