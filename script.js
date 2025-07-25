@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // Título seguro sin inyección
-            const baseTitle = 'Dame Más FM - Radio Online';
+            const baseTitle = 'DJ Matías Batista - Radio Online';
             document.title = isPlaying ? `▶ ${baseTitle} - EN VIVO` : baseTitle;
             
             // Favicon dinámico seguro
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- INICIALIZACIÓN SEGURA ---
-    console.log('Dame Más FM v4.1 - SEO & Security Optimized - Initialized');
+    console.log('Radio Matías Batista v1.0 - SEO & Security Optimized - Initialized');
     resetToInitialState();
     updateUI();
     

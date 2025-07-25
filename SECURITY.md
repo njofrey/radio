@@ -1,7 +1,7 @@
 # 🔒 SECURITY DOCUMENTATION - Radio Matías Batista v1.0
 
 ## Overview
-Este documento detalla todas las medidas de seguridad implementadas en Dame Más FM para proteger tanto la aplicación como los usuarios.
+Este documento detalla todas las medidas de seguridad implementadas en Radio Matías Batista para proteger tanto la aplicación como los usuarios.
 
 ---
 
@@ -237,4 +237,4 @@ Si encuentras una vulnerabilidad de seguridad, por favor:
 
 ---
 
-*Última actualización: Enero 2025 - Dame Más FM v4.1_SEO_SECURED* 
+*Última actualización: Enero 2025 - Radio Matías Batista v1.0_SEO_SECURED* 
