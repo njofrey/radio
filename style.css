@@ -368,10 +368,6 @@ footer {
 
 /* --- RESPONSIVE MEJORADO CON UX MÓVIL OPTIMIZADA --- */
 @media (max-width: 768px) {
-    body {
-        padding-bottom: 240px; /* espacio para footer debajo de consola sticky */
-    }
-
     .main-content {
         padding: 30px 15px;
         gap: 30px;
@@ -419,25 +415,17 @@ footer {
         text-align: center;
     }
     
-    /* --- UX MÓVIL: CONSOLA STICKY PARA ERGONOMÍA DEL PULGAR --- */
+    /* .console mantiene su flujo normal en móvil, sin posición fija */
     .console {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-bottom: 15px;
-        background-color: var(--white);
+        margin: 0 auto;
         padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
         border: 2px solid var(--black);
-        z-index: 1000;
-        max-width: calc(100vw - 30px); /* Respeta márgenes laterales */
+        border-radius: 8px;
+        background-color: var(--white);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    
-    .control-panel, .console {
-        max-width: 100%;
-    }
+ 
+    .control-panel, .console { max-width: 100%; }
     
     .status-item {
         grid-template-columns: 100px 1fr;
