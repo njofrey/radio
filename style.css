@@ -498,6 +498,12 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    .marquee-text {
+        animation: scroll-brutal 15s linear infinite !important;
+    }
+}
+
 /* --- MODO ALTO CONTRASTE --- */
 @media (prefers-contrast: high) {
     :root {
