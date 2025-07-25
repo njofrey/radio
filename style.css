@@ -372,6 +372,7 @@ footer {
         padding: 30px 15px;
         gap: 30px;
         /* padding-bottom: 280px;  eliminado, se maneja en body */
+        justify-content: flex-start; /* Evita espacio grande al final */
     }
     
     /* --- ALINEACIÓN PERFECTA DEL TÍTULO EN MÓVIL --- */
