@@ -368,10 +368,14 @@ footer {
 
 /* --- RESPONSIVE MEJORADO CON UX MÓVIL OPTIMIZADA --- */
 @media (max-width: 768px) {
+    body {
+        padding-bottom: 240px; /* espacio para footer debajo de consola sticky */
+    }
+
     .main-content {
         padding: 30px 15px;
         gap: 30px;
-        padding-bottom: 280px; /* Espacio para consola sticky */
+        /* padding-bottom: 280px;  eliminado, se maneja en body */
     }
     
     /* --- ALINEACIÓN PERFECTA DEL TÍTULO EN MÓVIL --- */
