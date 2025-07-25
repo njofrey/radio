@@ -1,0 +1,575 @@
+/* DAME MAS FM - BRUTAL WEB DESIGN v4.1 - UX/UI OPTIMIZED */
+
+:root {
+    /* Paleta de colores principal - Optimizada para accesibilidad */
+    --black: #000000;
+    --white: #FFFFFF;
+    --grey: #F0F0F0;
+    --grey-dark: #E0E0E0;
+    --red: #FF0000;
+    --red-dark: #CC0000;
+    --yellow: #FFD700; /* Más legible que #FFFF00 puro */
+    --yellow-dark: #B8860B;
+    --green: #008000; /* Restaurado para estados positivos */
+    --orange: #FF8C00; /* Para estados de advertencia */
+    
+    /* Colores de estado - Mejorados para contraste */
+    --color-offline: var(--black);
+    --color-connecting: var(--orange);
+    --color-live: var(--red);
+    --color-error: var(--red-dark);
+    --color-success: var(--green);
+    
+    /* Opacidades para separadores */
+    --separator-opacity: 0.20;
+    --border-thickness: 2px;
+}
+
+/* --- RESET Y CONFIGURACION BRUTAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    background-color: var(--white);
+    color: var(--black);
+    line-height: 1.2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* --- ESTRUCTURA PRINCIPAL --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 60px; /* Más espacio entre header y consola */
+}
+
+/* --- TÍTULO PRINCIPAL --- */
+.main-title {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.main-title h1 {
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-left: 8px solid var(--black);
+    padding-left: 20px;
+    text-align: left;
+}
+
+/* === Akira Expanded – self-hosted === */
+@font-face {
+    font-family: 'Akira Expanded';
+    src: url('Fonts/Akira Expanded Demo.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Apply new font to main title */
+.main-title h1 {
+    font-family: 'Akira Expanded', 'JetBrains Mono', monospace;
+    font-weight: 400;
+}
+
+.subtitle-block {
+    border: 3px solid var(--black);
+    padding: 15px;
+    background-color: var(--black);
+    color: var(--white);
+    display: inline-block;
+    margin-left: 28px;
+}
+
+.subtitle-block h2 {
+    font-size: clamp(0.8rem, 3vw, 1.1rem);
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* --- NUEVA CONSOLA DE CONTROL --- */
+.console {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre el botón y el panel */
+}
+
+/* --- BOTÓN PRINCIPAL OPTIMIZADO - ESTADOS MEJORADOS --- */
+.main-play-button {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: var(--yellow); /* AMARILLO POR DEFECTO PARA MEJOR CONVERSIÓN */
+    color: var(--black);
+    border: 4px solid var(--black);
+    padding: 20px 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.1s ease;
+    box-shadow: 4px 4px 0px var(--black);
+    position: relative;
+    outline: none; /* Removemos outline por defecto */
+}
+
+.main-play-button:hover {
+    background-color: var(--white);
+    color: var(--black);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--black);
+}
+
+.main-play-button:active {
+    transform: translate(4px, 4px) scale(0.98); /* EFECTO TÁCTIL MEJORADO */
+    box-shadow: 0px 0px 0px var(--black);
+}
+
+/* FOCUS STATE MEJORADO - Sin borde amarillo molesto de Chrome */
+.main-play-button:focus {
+    outline: none; /* Quitamos outline nativo */
+    /* En su lugar, usamos un efecto sutil sin colores confusos */
+    box-shadow: 4px 4px 0px var(--black), 0 0 0 2px var(--white), 0 0 0 4px var(--black);
+}
+
+.main-play-button:focus:not(:focus-visible) {
+    /* Quitamos focus para clicks de mouse */
+    box-shadow: 4px 4px 0px var(--black);
+}
+
+.main-play-button:focus-visible {
+    /* Solo para navegación por teclado */
+    box-shadow: 4px 4px 0px var(--black), 0 0 0 2px var(--white), 0 0 0 4px var(--black);
+}
+
+/* Estados mejorados del botón */
+.main-play-button.loading {
+    animation: pulse-loading 1.5s infinite;
+    background-color: var(--orange);
+    color: var(--black);
+    border-color: var(--black);
+}
+
+.main-play-button.playing {
+    background-color: var(--red);
+    color: var(--white);
+    border-color: var(--black); /* Borde negro consistente */
+    box-shadow: 4px 4px 0px var(--black); /* Sombra negra, no roja */
+}
+
+.main-play-button.playing:hover {
+    background-color: var(--red-dark);
+    color: var(--white);
+    border-color: var(--black);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--black); /* Sombra negra consistente */
+}
+
+.main-play-button.playing:active {
+    transform: translate(4px, 4px) scale(0.98);
+    box-shadow: 0px 0px 0px var(--black); /* Sombra negra consistente */
+}
+
+/* FOCUS para estado playing - sin sombra roja confusa */
+.main-play-button.playing:focus {
+    box-shadow: 4px 4px 0px var(--black), 0 0 0 2px var(--white), 0 0 0 4px var(--black);
+}
+
+.main-play-button.playing:focus:not(:focus-visible) {
+    box-shadow: 4px 4px 0px var(--black);
+}
+
+.main-play-button.error {
+    background-color: var(--red-dark);
+    color: var(--white);
+    border-color: var(--black);
+    box-shadow: 4px 4px 0px var(--black);
+    animation: none;
+}
+
+@keyframes pulse-loading {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* --- PANEL DE INFORMACIÓN MEJORADO --- */
+.control-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    border: 3px solid var(--black);
+    background-color: var(--black);
+}
+
+.status-item {
+    background-color: var(--white);
+    padding: 12px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+.status-item:nth-child(even) {
+    background-color: var(--grey);
+}
+
+/* ELIMINADOS LOS HOVER EFFECTS CONFUSOS EN ELEMENTOS NO CLICKABLES */
+
+.status-item .status-label {
+    color: var(--black);
+    font-weight: 700;
+    text-align: left;
+    border-right: var(--border-thickness) solid rgba(0, 0, 0, var(--separator-opacity));
+    padding-right: 15px;
+}
+
+.status-item .status-value {
+    color: var(--red);
+    font-weight: 700;
+    text-align: right;
+    padding-left: 10px;
+    transition: color 0.3s ease;
+}
+
+/* Estados de color específicos para valores */
+.status-item .status-value.offline {
+    color: var(--color-offline);
+}
+
+.status-item .status-value.connecting {
+    color: var(--color-connecting);
+}
+
+.status-item .status-value.live {
+    color: var(--color-live);
+}
+
+.status-item .status-value.error {
+    color: var(--color-error);
+}
+
+/* --- MARQUEE OPTIMIZADO --- */
+.marquee-item {
+    padding: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.marquee-item .status-label {
+    border-right: none;
+    padding-right: 0;
+}
+
+.marquee-text-container {
+    overflow: hidden;
+    white-space: nowrap;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-text {
+    display: inline-block;
+    margin: 0;
+    padding: 14px 0;
+    padding-left: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: scroll-brutal 15s linear infinite;
+}
+
+.marquee-text span {
+    margin-right: 100px;
+}
+
+@keyframes scroll-brutal {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* --- FOOTER BRUTAL --- */
+footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 20px 40px;
+    border-top: 4px solid var(--black);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.build-info {
+    color: var(--yellow);
+    font-weight: 700;
+}
+
+/* --- AUDIO PLAYER OCULTO --- */
+#audio-player {
+    display: none;
+}
+
+/* --- RESPONSIVE MEJORADO CON UX MÓVIL OPTIMIZADA --- */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 15px;
+        gap: 30px;
+        padding-bottom: 280px; /* Espacio para consola sticky */
+    }
+    
+    /* --- ALINEACIÓN PERFECTA DEL TÍTULO EN MÓVIL --- */
+    .main-title {
+        display: flex; /* Convertimos el contenedor en flexbox */
+        flex-direction: column; /* Apilamos los elementos verticalmente */
+        align-items: flex-start; /* Alineamos todo a la izquierda */
+        gap: 15px; /* Un espacio limpio entre título y subtítulo */
+    }
+    
+    .main-title h1 {
+        font-size: clamp(2rem, 12vw, 2.8rem); /* Hacemos la fuente un poco más grande en móvil */
+        border-left: none; /* Quitamos el borde lateral */
+        padding-left: 0; /* Quitamos el padding lateral */
+        border-top: 6px solid var(--black); /* Lo reemplazamos por un borde superior */
+        padding-top: 10px; /* Añadimos espacio arriba */
+        text-align: left; /* Aseguramos la alineación */
+        width: 100%; /* Hacemos que ocupe todo el ancho del contenedor */
+    }
+    
+    .main-title h1 {
+        font-family: 'Akira Expanded', 'JetBrains Mono', monospace;
+        font-weight: 400;
+    }
+    
+    .subtitle-block {
+        margin-left: 0; /* Quitamos el margen que causaba el desequilibrio */
+        padding: 12px;
+        text-align: left;
+    }
+    
+    .main-play-button {
+        font-size: 20px;
+        padding: 18px 35px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    /* --- UX MÓVIL: CONSOLA STICKY PARA ERGONOMÍA DEL PULGAR --- */
+    .console {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 15px;
+        background-color: var(--white);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+        border: 2px solid var(--black);
+        z-index: 1000;
+        max-width: calc(100vw - 30px); /* Respeta márgenes laterales */
+    }
+    
+    .control-panel, .console {
+        max-width: 100%;
+    }
+    
+    .status-item {
+        grid-template-columns: 100px 1fr;
+        gap: 12px;
+    }
+    
+    .status-item .status-label {
+        padding-right: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 20px 10px;
+        gap: 25px;
+        padding-bottom: 300px; /* Más espacio para consola en pantallas muy pequeñas */
+    }
+    
+    .main-play-button {
+        font-size: 18px;
+        padding: 16px 30px;
+        letter-spacing: 1px;
+    }
+    
+    .console {
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+    }
+    
+    .marquee-text {
+        font-size: 12px;
+        letter-spacing: 1px;
+        padding: 12px 0;
+    }
+    
+    .status-item {
+        font-size: 12px;
+        padding: 10px 12px;
+        grid-template-columns: 80px 1fr;
+        gap: 10px;
+    }
+    
+    .status-item .status-label {
+        padding-right: 10px;
+    }
+}
+
+/* --- ACCESIBILIDAD MEJORADA --- */
+@media (prefers-reduced-motion: reduce) {
+    .marquee-text {
+        animation: none;
+        padding-left: 15px;
+    }
+    
+    .main-play-button.loading {
+        animation: none;
+    }
+    
+    * {
+        transition: none !important;
+    }
+}
+
+/* --- MODO ALTO CONTRASTE --- */
+@media (prefers-contrast: high) {
+    :root {
+        --separator-opacity: 0.4;
+        --border-thickness: 3px;
+    }
+    
+    .status-item .status-label {
+        border-right-width: 3px;
+    }
+    
+    .console {
+        border-width: 3px !important;
+    }
+}
+
+/* --- HEADER ADJUSTMENTS (remove border, center text) --- */
+.main-title {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-title h1 {
+    border: none;
+    padding: 0;
+    text-align: center;
+}
+
+.subtitle-block {
+    margin-left: 0;
+    text-align: center;
+}
+
+/* Neon ON AIR indicator */
+.neon-on-air {
+    position: relative;
+    margin: 2px auto 8px; /* closer to h1, slight bottom gap */
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 700;
+    color: #FF3600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid #FF3600;
+    border-radius: 6px;
+    background: rgba(255, 54, 0, 0.05);
+    box-shadow:
+        0 0 6px rgba(255, 54, 0, 0.9),
+        0 0 16px rgba(255, 54, 0, 0.6),
+        inset 0 0 6px rgba(255, 54, 0, 0.7);
+    animation: neonPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(255, 54, 0, 0.8), 0 0 18px rgba(255, 54, 0, 0.6), inset 0 0 6px rgba(255, 54, 0, 0.7);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 3px rgba(255, 54, 0, 0.5), 0 0 10px rgba(255, 54, 0, 0.3), inset 0 0 3px rgba(255, 54, 0, 0.4);
+        opacity: 0.8;
+    }
+}
+
+@media (max-width: 768px) {
+    .neon-on-air {
+        margin: 2px auto 8px;
+    }
+    .from-dios {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+    .main-content {
+        gap: 50px; /* Ajuste para móvil manteniendo ergonomía */
+    }
+}
+
+/* Remove old .on-air style block (redundant) */
+.on-air { display:none; }
+
+.from-dios {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .from-dios {
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+    }
+}
+
+.subtitle-block { display:none; }

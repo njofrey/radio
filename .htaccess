@@ -1,0 +1,161 @@
+# Dame Más FM - Security & Performance Configuration
+# v4.1 SEO & Security Optimized
+
+# ===============================================
+# SECURITY HEADERS
+# ===============================================
+
+# Content Security Policy
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; media-src 'self' https://sonic.portalfoxmix.club; connect-src 'self' https://sonic.portalfoxmix.club; img-src 'self' data:; frame-ancestors 'none';"
+
+# X-Frame-Options (Clickjacking protection)
+Header always set X-Frame-Options "DENY"
+
+# X-Content-Type-Options (MIME type sniffing protection)
+Header always set X-Content-Type-Options "nosniff"
+
+# X-XSS-Protection
+Header always set X-XSS-Protection "1; mode=block"
+
+# Referrer Policy
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# HTTP Strict Transport Security (HSTS)
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Permissions Policy
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=(self)"
+
+# ===============================================
+# CACHING & PERFORMANCE
+# ===============================================
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+</IfModule>
+
+# Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # HTML files (1 day)
+    ExpiresByType text/html "access plus 1 day"
+    
+    # CSS files (1 week)
+    ExpiresByType text/css "access plus 1 week"
+    
+    # JavaScript files (1 week)
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType application/x-javascript "access plus 1 week"
+    
+    # Fonts (1 month)
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
+    
+    # Images (1 month)
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# ===============================================
+# SEO OPTIMIZATIONS
+# ===============================================
+
+# Remove server signature
+ServerTokens Prod
+Header unset Server
+
+# Canonical URL enforcement
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^damemasfm\.com$ [NC]
+RewriteRule ^(.*)$ https://damemasfm.com/$1 [R=301,L]
+
+# Remove trailing slash (except for directories)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} /+[^\s]*\s [NC]
+RewriteRule ^(.*)/$  /$1 [R=301,L]
+
+# ===============================================
+# ERROR PAGES
+# ===============================================
+
+ErrorDocument 404 /index.html
+ErrorDocument 500 /index.html
+
+# ===============================================
+# FILE ACCESS RESTRICTIONS
+# ===============================================
+
+# Protect system files
+<Files ".htaccess">
+    Require all denied
+</Files>
+
+<Files ".DS_Store">
+    Require all denied
+</Files>
+
+<Files "*.log">
+    Require all denied
+</Files>
+
+# ===============================================
+# CORS HEADERS FOR AUDIO STREAMING
+# ===============================================
+
+<IfModule mod_headers.c>
+    # Allow cross-origin requests for audio files
+    <FilesMatch "\.(mp3|wav|ogg|m4a|aac)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "Range"
+    </FilesMatch>
+</IfModule>
+
+# ===============================================
+# PERFORMANCE OPTIMIZATIONS
+# ===============================================
+
+# Enable Keep-Alive
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+
+# Compress HTML, CSS, JavaScript, Text, XML and fonts
+<IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+</IfModule> 
