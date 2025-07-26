@@ -146,11 +146,11 @@ html {
 
 /* Hover sólo en dispositivos con cursor */
 @media (hover: hover) {
-    .main-play-button:hover {
-        background-color: var(--white);
-        color: var(--black);
-        transform: translate(2px, 2px);
-        box-shadow: 2px 2px 0px var(--black);
+.main-play-button:hover {
+    background-color: var(--white);
+    color: var(--black);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--black);
     }
 }
 
@@ -430,7 +430,7 @@ footer {
         background-color: var(--white);
         box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
- 
+    
     .control-panel, .console { max-width: 100%; }
     
     .status-item {
