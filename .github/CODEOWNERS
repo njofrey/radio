@@ -1,0 +1,24 @@
+# CODEOWNERS para Radio Matías Batista
+# Este archivo define quién debe revisar automáticamente los cambios
+
+# Archivos críticos - siempre requieren review
+/index.html @njofrey
+/script.js @njofrey
+/style.css @njofrey
+/manifest.json @njofrey
+
+# Archivos de configuración y documentación
+/README.md @njofrey
+/CONTRIBUTING.md @njofrey
+/SECURITY.md @njofrey
+/.github/ @njofrey
+
+# Archivos de fuentes (cambios importantes)
+/Fonts/ @njofrey
+
+# Archivos SEO
+/robots.txt @njofrey
+/sitemap.xml @njofrey
+
+# Configuración de seguridad
+/.gitignore @njofrey 

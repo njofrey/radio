@@ -1,0 +1,72 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+.cache/
+
+# Archivos de build (si se añaden en el futuro)
+dist/
+build/
+out/
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de backup
+*.bak
+*.backup
+
+# Archivos de testing (si se añaden en el futuro)
+coverage/
+.nyc_output/
+
+# Archivos de deployment
+.netlify/
+.vercel/
+
+# Archivos de seguridad
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Archivos de audio/video (no subir al repo)
+*.mp3
+*.wav
+*.ogg
+*.mp4
+*.avi
+*.mov
+
+# Archivos de fuentes adicionales (mantener solo Akira Expanded)
+Fonts/*
+!Fonts/Akira Expanded Demo.otf 
