@@ -273,12 +273,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateFavicon() {
         const favicon = document.getElementById('favicon');
         if (!favicon) return;
-        
+
         try {
-            const svgContent = isPlaying 
-                ? "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23FF0000'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-size='10'>▶</text></svg>"
-                : "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-size='10'>📻</text></svg>";
-            
+            const svgContent = isPlaying
+                ? "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23FF0000'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='monospace' font-weight='700' font-size='7'>MB</text></svg>"
+                : "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='monospace' font-weight='700' font-size='7'>MB</text></svg>";
+
             favicon.setAttribute('href', `data:image/svg+xml,${svgContent}`);
         } catch (error) {
             console.error('FAVICON_UPDATE_ERROR:', error);
