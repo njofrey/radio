@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // URL de stream con validación de seguridad
-    const ALLOWED_STREAM_HOSTS = ['sonic.portalfoxmix.club'];
-    const streamUrl = 'https://sonic.portalfoxmix.club/8196/stream';
+    const ALLOWED_STREAM_HOSTS = ['46.224.121.157'];
+    const streamUrl = 'http://46.224.121.157/listen/matias_batista/radio.mp3';
     
     // Validar URL del stream
     function validateStreamUrl(url) {
         try {
             const urlObj = new URL(url);
-            return ALLOWED_STREAM_HOSTS.includes(urlObj.hostname) && urlObj.protocol === 'https:';
+            return ALLOWED_STREAM_HOSTS.includes(urlObj.hostname) && (urlObj.protocol === 'http:' || urlObj.protocol === 'https:');
         } catch (e) {
             console.error('SECURITY: Invalid stream URL', e);
             return false;
