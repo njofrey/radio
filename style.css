@@ -337,7 +337,7 @@ html {
 }
 
 .marquee-text {
-    display: inline-block;
+    display: inline-flex;
     margin: 0;
     padding: 14px 0;
     padding-left: 100%;
@@ -346,15 +346,23 @@ html {
     letter-spacing: 2px;
     text-transform: uppercase;
     animation: scroll-brutal 15s linear infinite;
+    will-change: transform;
 }
 
 .marquee-text span {
-    margin-right: 100px;
+    flex-shrink: 0;
+    padding-right: 50px;
+    min-width: max-content;
+}
+
+.marquee-text span::after {
+    content: ' /// ';
+    opacity: 0.5;
 }
 
 @keyframes scroll-brutal {
     0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-50%); }
 }
 
 /* --- FOOTER BRUTAL --- */

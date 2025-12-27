@@ -402,6 +402,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('PAGE_HIDDEN: Manteniendo stream activo');
         } else if (!document.hidden && isPlaying) {
             updateUI();
+
+            // Resetear animación del marquee para evitar el "avance rápido"
+            if (nowPlayingText) {
+                nowPlayingText.style.animation = 'none';
+                setTimeout(() => {
+                    nowPlayingText.style.animation = '';
+                }, 10);
+            }
         }
     });
 
