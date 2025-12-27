@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusLive = document.getElementById('status-live');
     const statusTime = document.getElementById('status-time');
     const statusStream = document.getElementById('status-stream');
+    const albumArtContainer = document.getElementById('album-art-container');
+    const albumArtImg = document.getElementById('album-art');
 
     // Validación de elementos críticos
     if (!audioPlayer || !playButton || !nowPlayingText) {
@@ -296,12 +298,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const song = data.now_playing.song;
                 const artist = song.artist || 'Unknown Artist';
                 const title = song.title || 'Unknown Track';
+                const artUrl = song.art;
+
                 updateMarqueeText(artist, title);
+                updateAlbumArt(artUrl);
             }
         } catch (error) {
             console.error('NOW_PLAYING_FETCH_ERROR:', error);
             // Fallback to generic message on error
             updateMarqueeText('RADIO MATÍAS BATISTA', 'ON AIR 24/7');
+            hideAlbumArt();
+        }
+    }
+
+    // --- ACTUALIZAR ALBUM ART ---
+    function updateAlbumArt(artUrl) {
+        if (!albumArtContainer || !albumArtImg) return;
+
+        if (artUrl) {
+            albumArtImg.src = artUrl;
+            albumArtContainer.style.display = 'block';
+        } else {
+            hideAlbumArt();
+        }
+    }
+
+    function hideAlbumArt() {
+        if (albumArtContainer) {
+            albumArtContainer.style.display = 'none';
         }
     }
 
@@ -313,11 +337,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateMarqueeText(artist, songTitle) {
         if (!nowPlayingText) return;
-        
+
         try {
             const safeArtist = sanitizeText(artist);
             const safeSongTitle = sanitizeText(songTitle);
-            const brutalText = `>>> ${safeSongTitle} - ${safeArtist} <<<`;
+            const brutalText = `>>> ARTIST: ${safeArtist} - SONG: ${safeSongTitle} <<<`;
             
             // Crear elementos seguros
             const span1 = document.createElement('span');
