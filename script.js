@@ -302,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 updateMarqueeText(artist, title);
                 updateAlbumArt(artUrl);
+                updateMediaSession(artist, title, artUrl);
             }
         } catch (error) {
             console.error('NOW_PLAYING_FETCH_ERROR:', error);
@@ -326,6 +327,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideAlbumArt() {
         if (albumArtContainer) {
             albumArtContainer.style.display = 'none';
+        }
+    }
+
+    // --- ACTUALIZAR MEDIASESSION (CARPLAY, LOCK SCREEN) ---
+    function updateMediaSession(artist, title, artUrl) {
+        if (!('mediaSession' in navigator)) return;
+
+        try {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: title,
+                artist: artist,
+                album: 'Radio Matías Batista',
+                artwork: artUrl ? [
+                    { src: artUrl, sizes: '512x512', type: 'image/jpeg' },
+                    { src: artUrl, sizes: '256x256', type: 'image/jpeg' },
+                    { src: artUrl, sizes: '128x128', type: 'image/jpeg' }
+                ] : []
+            });
+        } catch (error) {
+            console.error('MEDIASESSION_UPDATE_ERROR:', error);
         }
     }
 
