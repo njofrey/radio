@@ -37,7 +37,7 @@
     <meta property="twitter:creator" content="@matiasbatistaradio">
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; media-src 'self' https://radio.matiasbatista.com; connect-src 'self' https://radio.matiasbatista.com; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; media-src 'self' https://radio.matiasbatista.com; connect-src 'self' https://radio.matiasbatista.com; img-src 'self' data: https://radio.matiasbatista.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
@@ -108,7 +108,7 @@
 
         <section class="console" role="region" aria-label="Controles de Radio">
             <div id="album-art-container" class="album-art-container" style="display: none;">
-                <img id="album-art" class="album-art" alt="Album Art" src="" />
+                <img id="album-art" class="album-art" alt="Album Art" src="" crossorigin="anonymous" />
             </div>
             <button id="play-btn" class="main-play-button" aria-label="PLAY" type="button">
                 PLAY

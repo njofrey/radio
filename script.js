@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const safeArtist = sanitizeText(artist);
             const safeSongTitle = sanitizeText(songTitle);
-            const brutalText = `>>> ARTIST: ${safeArtist} - SONG: ${safeSongTitle} <<<`;
+            const brutalText = `>>> ARTIST: ${safeArtist} // SONG: ${safeSongTitle} <<<`;
             
             // Crear elementos seguros
             const span1 = document.createElement('span');
