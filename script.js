@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // URL de stream con validación de seguridad
-    const ALLOWED_STREAM_HOSTS = ['46.224.121.157'];
-    const streamUrl = 'http://46.224.121.157/listen/matias_batista/radio.mp3';
+    const ALLOWED_STREAM_HOSTS = ['radio.matiasbatista.com'];
+    const streamUrl = 'https://radio.matiasbatista.com/listen/matias_batista/radio.mp3';
+    const nowPlayingApiUrl = 'https://radio.matiasbatista.com/api/nowplaying_static/matias_batista.json';
     
     // Validar URL del stream
     function validateStreamUrl(url) {
@@ -38,17 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let isLoading = false;
     let hasInitialized = false;
     let hasError = false;
-    let lastSongIndex = -1;
     let requestCount = 0; // Rate limiting simple
     const MAX_REQUESTS_PER_MINUTE = 30;
-    
-    // CANCIONES RESTAURADAS - Catálogo completo con sanitización
-    const brutalSongs = [
-        { artist: "SINCE_1985", song_title: "CURATED_MUSIC" },
-    ].map(song => ({
-        artist: sanitizeText(song.artist),
-        song_title: sanitizeText(song.song_title)
-    }));
+    let nowPlayingData = null;
 
     // Función de sanitización para prevenir XSS
     function sanitizeText(text) {
@@ -290,22 +283,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- OBTENER INFORMACIÓN DE NOW PLAYING ---
+    async function fetchNowPlaying() {
+        try {
+            const response = await fetch(nowPlayingApiUrl);
+            if (!response.ok) throw new Error('API request failed');
+
+            const data = await response.json();
+            nowPlayingData = data;
+
+            if (data.now_playing && data.now_playing.song) {
+                const song = data.now_playing.song;
+                const artist = song.artist || 'Unknown Artist';
+                const title = song.title || 'Unknown Track';
+                updateMarqueeText(artist, title);
+            }
+        } catch (error) {
+            console.error('NOW_PLAYING_FETCH_ERROR:', error);
+            // Fallback to generic message on error
+            updateMarqueeText('RADIO MATÍAS BATISTA', 'ON AIR 24/7');
+        }
+    }
+
     // --- CAMBIO DE CANCIONES SEGURO ---
     function changeNowPlaying() {
         if (!isPlaying || hasError || !nowPlayingText) return;
-        
-        try {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * brutalSongs.length);
-            } while (brutalSongs.length > 1 && randomIndex === lastSongIndex);
-            
-            lastSongIndex = randomIndex;
-            const randomSong = brutalSongs[randomIndex];
-            updateMarqueeText(randomSong.artist, randomSong.song_title);
-        } catch (error) {
-            console.error('SONG_CHANGE_ERROR:', error);
-        }
+        fetchNowPlaying();
     }
 
     function updateMarqueeText(artist, songTitle) {
@@ -369,18 +372,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- INICIALIZACIÓN SEGURA ---
-    console.log('Radio Matías Batista v1.0 - SEO & Security Optimized - Initialized');
+    console.log('Radio Matías Batista v2.0 - Now Playing Integration - Initialized');
     resetToInitialState();
     updateUI();
-    
-    // INTERVALOS OPTIMIZADOS - Más frecuente cambio de canciones cuando está live
+
+    // INTERVALOS OPTIMIZADOS - Fetch Now Playing cada 15 segundos
     const songInterval = setInterval(() => {
         try {
-            changeNowPlaying();
+            if (isPlaying && !hasError) {
+                fetchNowPlaying();
+            }
         } catch (error) {
             console.error('SONG_INTERVAL_ERROR:', error);
         }
-    }, 15000); // Cada 15 segundos (más dinámico)
+    }, 15000); // Cada 15 segundos
     
     const statusInterval = setInterval(() => {
         try {
