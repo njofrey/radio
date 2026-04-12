@@ -16,16 +16,19 @@ Si encuentras una vulnerabilidad de seguridad, **NO** la reportes públicamente.
 ## 🔐 Medidas de Seguridad Implementadas
 
 ### Content Security Policy (CSP)
-```html
-<meta http-equiv="Content-Security-Policy" content="
-    default-src 'self'; 
-    script-src 'self' 'unsafe-inline'; 
-    style-src 'self' 'unsafe-inline' fonts.googleapis.com; 
-    font-src 'self' fonts.gstatic.com; 
-    media-src 'self' https://sonic.portalfoxmix.club; 
-    connect-src 'self' https://sonic.portalfoxmix.club; 
-    img-src 'self' data:;
-">
+
+CSP real se aplica como HTTP header vía `vercel.json` (el meta tag en HTML sirve como fallback):
+
+```
+default-src 'self';
+script-src 'self';
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.gstatic.com;
+media-src 'self' https://radio.matiasbatista.com;
+connect-src 'self' https://radio.matiasbatista.com;
+img-src 'self' data: https:;
+frame-ancestors 'none';
+base-uri 'self';
 ```
 
 ### Headers de Seguridad
@@ -47,12 +50,12 @@ function sanitizeText(text) {
 ### Validación de URLs
 ```javascript
 // Validar URLs externas permitidas
-const ALLOWED_STREAM_HOSTS = ['sonic.portalfoxmix.club'];
+const ALLOWED_STREAM_HOSTS = ['radio.matiasbatista.com'];
 function validateStreamUrl(url) {
     try {
         const urlObj = new URL(url);
-        return ALLOWED_STREAM_HOSTS.includes(urlObj.hostname) && 
-               urlObj.protocol === 'https:';
+        return ALLOWED_STREAM_HOSTS.includes(urlObj.hostname) &&
+               (urlObj.protocol === 'http:' || urlObj.protocol === 'https:');
     } catch (e) {
         return false;
     }
@@ -134,13 +137,14 @@ function checkRateLimit() {
 
 ## 🔄 Actualizaciones
 
+- **v2.2**: Migración a Vercel + `vercel.json` con headers reales (HSTS, CSP, COOP). Stream migrado a `radio.matiasbatista.com` (AzuraCast propio). Eliminado `.htaccess`.
 - **v2.1**: CSP headers implementados
 - **v2.0**: Sanitización de inputs añadida
 - **v1.0**: Headers de seguridad básicos
 
 ---
 
-**Última actualización**: Diciembre 2024  
-**Próxima revisión**: Enero 2025
+**Última actualización**: Abril 2026
+**Próxima revisión**: Octubre 2026
 
-**BUILD: v2.1** | **WITH_LOVE_FROM_NICOLAS_JOFRE** ❤️ 
+**BUILD: v2.2** | **WITH_LOVE_FROM_NICOLAS_JOFRE**

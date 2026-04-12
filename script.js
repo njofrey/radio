@@ -413,17 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Prevenir ataques de navegación maliciosa
-    window.addEventListener('beforeunload', () => {
-        try {
-            if (isPlaying && audioPlayer) {
-                audioPlayer.pause();
-            }
-        } catch (error) {
-            console.error('CLEANUP_ERROR:', error);
-        }
-    });
-
     // --- INICIALIZACIÓN SEGURA ---
     console.log('Radio Matías Batista v2.0 - Now Playing Integration - Initialized');
     resetToInitialState();
@@ -448,10 +437,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 
-    // Limpieza de intervalos al salir
+    // Limpieza al salir: pausa audio y limpia intervals
     window.addEventListener('beforeunload', () => {
-        clearInterval(songInterval);
-        clearInterval(statusInterval);
+        try {
+            if (isPlaying && audioPlayer) audioPlayer.pause();
+            clearInterval(songInterval);
+            clearInterval(statusInterval);
+        } catch (error) {
+            console.error('CLEANUP_ERROR:', error);
+        }
     });
 
     // Insert current year in footer

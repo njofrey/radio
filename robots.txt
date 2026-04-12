@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 
-# SEO Optimizado para Radio Matías Batista
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
@@ -10,24 +9,6 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
-# Archivos principales
-Allow: /index.html
-Allow: /style.css
-Allow: /script.js
-
-# Prevenir crawling de archivos del sistema
 Disallow: /.DS_Store
-Disallow: /.*
 
-# URLs de imágenes para SEO
-Allow: /favicon.ico
-Allow: /og-image.jpg
-Allow: /apple-touch-icon.png
-
-# Sitemap
 Sitemap: https://matiasbatista.com/sitemap.xml
-
-# Información adicional
-# Radio Matías Batista - Radio Online
-# Transmisión en vivo curada 24/7
-# https://matiasbatista.com 
